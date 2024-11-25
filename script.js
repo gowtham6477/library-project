@@ -1,6 +1,6 @@
  const myLibrary = [];
 
- function Book(){
+ function Book(title,author,pages,read){
     this.title = title;
     this.author = author;
     this.pages=pages;
@@ -8,7 +8,7 @@
  }
 
  function addbook(title,author,pages,read){
-    var book = new Book(title,author,pages,read);
+    const book = new Book(title,author,pages,read);
     myLibrary.push(book);
     displaybooks();
  }
@@ -41,3 +41,21 @@ function readBook(index){
     displaybooks();
 }
 
+document.getElementById('book-form').addEventListener('submit',(e)=>{
+    e.preventDefault();
+    const title = document.getElementById('title').value;
+    const author = document.getElementById('author').value;
+    const pages = document.getElementById('pages').value;
+    const read = document.getElementById('read').checked;
+
+    addbook(title,author,pages,read);
+    document.getElementById('book-form').reset();
+    document.getElementById('book-form-container').style.display='none';
+});
+
+document.getElementById('new-book-btn').addEventListener('click',()=>{
+    document.getElementById('book-form-container').style.display='block';
+});
+
+addbook('the great','f.scott',180,true);
+addbook('1984','george',328,false);
